@@ -2,8 +2,10 @@
 import numpy as np
 import pandas as pd
 
+# Define constants
+LOCATION = 'ny_state'
 # Read in data
-df = pd.read_csv('../data/raw_income_by_zip_la.csv')
+df = pd.read_csv(f'../data/raw_income_by_zip_{LOCATION}.csv')
 
 # Create column dictionary
 col_dict = {
@@ -45,4 +47,4 @@ df['home_price_to_income_ratios'] = df['median_home_value'] / df['median_househo
 # Drop 'median_home_value' and 'median_household_income'
 df.drop(columns=['median_home_value', 'median_household_income'], inplace=True)
 
-df.to_csv('../data/clean_income_by_zip_la.csv', index=False)
+df.to_csv(f'../data/clean_income_by_zip_{LOCATION}.csv', index=False)

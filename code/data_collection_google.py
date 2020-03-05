@@ -11,6 +11,7 @@ with open(str(Path.home() / 'api_keys/google_api.txt')) as file:
 client = googlemaps.Client(key=API_KEY, queries_per_second=2)
 
 LIST_OF_KEYWORDS = ['stores', 'restaurant', 'coffee shops']
+LOCATION = 'ny_state'
 
 
 def search_place(keyword, zipcode):
@@ -41,9 +42,9 @@ def serach_all_places(list_of_keywords, list_of_zipcodes):
 
 
 if __name__ == '__main__':
-    zcta = pd.read_csv('../data/zcta_la.csv')
+    zcta = pd.read_csv(f'../data/zcta_{LOCATION}.csv')
     list_of_zcta = list(zcta['zcta'].values)
 
     data = serach_all_places(LIST_OF_KEYWORDS, list_of_zcta)
 
-    data.to_csv('../data/raw_google_data_la.csv')
+    data.to_csv(f'../data/raw_google_data_{LOCATION}.csv', index=False)
