@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.utils import shuffle
 
 # Define constance
-LOCATION = 'ny_state'
+LOCATION = 'la'
 
 # Read in data
 df = pd.read_csv(f'../data/raw_google_data_{LOCATION}.csv')
@@ -113,8 +113,9 @@ df.index = index
 
 # Generate aggregated features
 # Drop unrelated columns
-cols_to_drop = ['name', 'place_id', 'location_lat', 'location_lng', 'compound_code', 'global_code',
-                'searched_keyword', 'searched_zipcode', 'permanently_closed']
+cols_to_drop = ['name', 'place_id', 'location_lat', 'location_lng', 
+                'compound_code', 'global_code',
+                'searched_keyword', 'searched_zipcode'] #'permanently_closed'
 df.drop(columns=cols_to_drop, inplace=True)
 
 # Dummify categorical col 'open now'
