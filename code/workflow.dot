@@ -1,0 +1,11 @@
+# Reference https://graphviz.gitlab.io/_pages/pdf/dotguide.pdf
+
+digraph g {
+    label = "Foo =bar";
+
+    google_places [shape=square, label="Google Place API", fillcolor="pink", style=filled];
+   
+    google_places -> "Merged Dataset"[ label = "Foo =bar"]; 
+    "Census Data" -> "Merged Dataset";
+     "Merged Dataset" -> "Naive Approch"
+}
