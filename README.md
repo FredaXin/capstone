@@ -37,13 +37,23 @@ informations, and receive predictions.
 ---
 ## Conclusion 
 ### Phase 1
+In Phase 1, I engineered aggregated features based on each zipcode, and
+concatenated them back to the original data-frame. In theory, the benefit of this
+approach is two fold:
+- we would be able to capture the general information of each zipcode.
+- we would be able to retrain the same amount of data as the original dataset. This will ensure that we have sufficient amount data. 
+
+The so-called “Naive Approach” is based on a simple idea: we would
+be able to use ALL the original observations to train the models. However, as we
+discovered that this approach led to data leakage issue, and therefore invalid. However, this does NOT mean that in general we can't use aggregated features along with the original dataset; we just can't aggregated the observations the SAME way that we aggregated the target.
+
 
 ### Phase 2
 In Phase 2, I used the aggregated observations by zipcode, combining with census
 data from the Income dataset to train the model.
 
 The pattern sub-model enabled us to handle missing data without imputation or dropping observations.
-Among all the regression models, the BaggingRegressor yields the best result
+Among all the regression models, the `BaggingRegressor` yields the best result
 based on the test R2 score. However, even the best model still shows signs of
 high variance, and the result is not optional.
 
@@ -58,12 +68,14 @@ model.
 
 
 ### Phase 3
-Based on the test scores, as well as the residuals plots, we can conclude that the model trained on the New York State dataset is inadequate for the predication of home affordability ratios in LA, especially given the model tends to over-predict the target. We can conclude that the trained model is not transferable.
+Without the census data, the performance of the model decreased. Training only with the Google Places API data, the `LinearRegression` Model combined with L1 Regularization outperforms the others. 
+
+Using the trained `LinearRegression` Model to make predictions for the LA dataset, the model performed badly. Based on the test scores, as well as the residuals plots, we can conclude that the model trained on the New York State dataset is inadequate for the predication of home affordability ratios in LA, especially given the model tends to over-predict the target. We can conclude that the trained model is not transferable. 
 
 This outcomes makes intuitive sense: New York State and LA has very different
 commercial landscapes, as well as demographic factors (such as median home
-prices and median annual income). The model has been fitted and trained on the
-former is not able to capture the patterns of the latter.
+prices and median annual income). The model that has been fitted and trained on the
+former is not able to capture the patterns of the latter. 
 
 ---
 ## Limitation and Next Steps
@@ -98,4 +110,5 @@ Using **Google Place API** has many limitations in the data collection process:
 
 ---
 ## References 
-
+- *[**Home Price-to-Income Ratios**](https://www.jchs.harvard.edu/home-price-income-ratios)* by Joint Center for Housing Studies of Harvard University
+- 
