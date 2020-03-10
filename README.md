@@ -1,3 +1,11 @@
+# Using Regression Models to Predict Home Affordability Ratio 
+
+Author: [Freda Xin](https://github.com/FredaXin)
+
+---
+## Table of Contents
+
+---
 ## Problem Statement:
 In regions where rapid new urban development emerges, home prices tend to become less affordable in the initial phase of the development. This phenomena occurs in many U.S. and Canadian cities such as San Francisco, Denver, and Vancouver, where the residents' income level does not keep up with the fast increase in home prices.
 
@@ -14,4 +22,24 @@ My project will be develped in 4 phases:
 Phase 1: Case study of NYC: develop models using NYC data
 Phase 2: Test if model is transferable for other urban areas, such as L.A. or Toronto
 Phase 3: Generlization: Test model can be generized and used in any given urban areas.
-Phase 4: Web interface: Develop a simple web interface so a client can imput informations, and receive predictions.
+Phase 4: Web interface: Develop a simple web interface so a client can imput
+informations, and receive predictions.
+
+---
+## Executive Summary
+
+---
+## List of Assumptions
+
+---
+## Workflow 
+
+---
+## Conclusion 
+
+---
+## Limitation and Next Steps
+
+---
+## References 
+
