@@ -48,29 +48,64 @@ municipality: if certain patterns of business activities emerges, the problem of
 a neighborhood becomes unaffordable might fellow.
 
 
+---
+## Executive Summary
 I will develop **supervised regression models** to predict affordability and
 use **R2** score as the metric to measure the performance of the models.
 
+During the data collection process, I encountered many limitations caused by the
+Google Places API, such as the limitation on the number of businesses returned per
+location and inaccuracy of the string search results. It is also worth noting
+that all Census data uses [ZIP Code Tabulation
+Areas
+(ZCTAs)](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html),
+which are different than zipcodes. When making Google API calls, ZCTAs were
+used instead of zipcodes. 
 
----
-## Executive Summary
+During the EDA process, I found that the distribution of the target home
+affordability ratios is right-skewed. This confirmed the common knowledge: some
+areas in New York City (and New York State) are extremely unaffordable. I also
+discovered that most features do not have a linear relationship with the target;
+this might indicate that models that rely on linear regression may not perform
+well. When analyzing the correlation between the features and the target, I
+found that the feature 'open_now' is the top 1 feature that is positively
+correlated with the target. I further analyzed this feature and the pros and
+cons of using this feature in training the models. 
 
 
+The modeling is divided into 3 phases: 
+
+**Phase 1**: the Naive Approach
+The so-called “Naive Approach” is based on a simple idea: we want to 
+be able to use ALL the original observations to train the models. 
+
+Motivated by this idea, I engineered aggregated features based on each zipcode, and
+concatenated them back to the original data-frame.
+
+In theory, the benefit of this
+approach is two fold:
+- we would be able to capture the general information of each zipcode.
+- we would be able to retrain the same amount of data as the original dataset. This will ensure that we have sufficient amount data. 
+
+**Phase 2**: Aggregation
+I used the aggregated observations by zipcode, combining with census data from the Income dataset to train the models.
+
+I used the the pattern sub-model technique to handle missing data. This enabled
+us to handle the missing data without imputation or dropping observations.
+
+
+
+Phase 3: Gen
+Phase 3 
+
+The general workflow of this project is also visuallized in the following gra
 ---
 ## Workflow 
 ![workflow](./image/workflow.png)
 ---
 ## Conclusion 
 ### Phase 1: the Naive Approach
-In Phase 1, I engineered aggregated features based on each zipcode, and
-concatenated them back to the original data-frame. In theory, the benefit of this
-approach is two fold:
-- we would be able to capture the general information of each zipcode.
-- we would be able to retrain the same amount of data as the original dataset. This will ensure that we have sufficient amount data. 
-
-The so-called “Naive Approach” is based on a simple idea: we would
-be able to use ALL the original observations to train the models. However, as we
-discovered that this approach led to data leakage issue, and therefore invalid. However, this does NOT mean that in general we can't use aggregated features along with the original dataset; we just can't aggregated the observations the SAME way that we aggregated the target.
+We discovered that the naive approach led to data leakage issue, and therefore invalid. However, this does NOT mean that in general we can't use aggregated features along with the original dataset; we just can't aggregated the observations the SAME way that we aggregated the target.
 
 
 ### Phase 2: Aggregation
@@ -81,9 +116,6 @@ The pattern sub-model enabled us to handle missing data without imputation or dr
 Among all the regression models, the `BaggingRegressor` yields the best result
 based on the test R2 score. However, even the best model still shows signs of
 high variance, and the result is not optional.
-
-During the model elevation process, we confirmed that the model violates the
-Equality of Variance and Independence of Errors assumptions.
 
 Based on the model evaluation, features from the census data play an
 importance role in the model's performance. This finding might pose challenges
