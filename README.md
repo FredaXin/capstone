@@ -50,13 +50,13 @@ a neighborhood becomes unaffordable might fellow.
 
 ---
 ## Executive Summary
-I will develop **supervised regression models** to predict affordability and
-use **R2** score as the metric to measure the performance of the models.
+I developed **supervised regression models** to predict affordability and
+used **R2** score as the metric to measure the performance of the models.
 
 During the data collection process, I encountered many limitations caused by the
 Google Places API, such as the limitation on the number of businesses returned per
 location and inaccuracy of the string search results. It is also worth noting
-that all Census data uses [ZIP Code Tabulation
+that all Census data reply on [ZIP Code Tabulation
 Areas
 (ZCTAs)](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html),
 which are different than zipcodes. When making Google API calls, ZCTAs were
@@ -68,14 +68,14 @@ areas in New York City (and New York State) are extremely unaffordable. I also
 discovered that most features do not have a linear relationship with the target;
 this might indicate that models that rely on linear regression may not perform
 well. When analyzing the correlation between the features and the target, I
-found that the feature 'open_now' is the top 1 feature that is positively
-correlated with the target. I further analyzed this feature and the pros and
+found that the feature 'open_now' was the top 1 feature that is positively
+correlated with the target. I further analyzed the pros and
 cons of using this feature in training the models. 
 
 
-The modeling is divided into 3 phases: 
+The modeling process is divided into 3 phases: 
 
-**Phase 1**: the Naive Approach
+**Phase 1**: the Naive Approach  
 The so-called “Naive Approach” is based on a simple idea: we want to 
 be able to use ALL the original observations to train the models. 
 
@@ -83,29 +83,39 @@ Motivated by this idea, I engineered aggregated features based on each zipcode, 
 concatenated them back to the original data-frame.
 
 In theory, the benefit of this
-approach is two fold:
-- we would be able to capture the general information of each zipcode.
-- we would be able to retrain the same amount of data as the original dataset. This will ensure that we have sufficient amount data. 
+approach is twofold:
+- We would be able to capture the general information of each zipcode.
+- We would be able to retain the same amount of data as the original dataset.
+  This will ensure that we have sufficient amount data to train the models.
 
-**Phase 2**: Aggregation
+**Phase 2**: Aggregation  
 I used the aggregated observations by zipcode, combining with census data from the Income dataset to train the models.
 
 I used the the pattern sub-model technique to handle missing data. This enabled
 us to handle the missing data without imputation or dropping observations.
 
+6 types of models were trained: Linear Regression (combined with various
+regularization techniques), Polynomial Regression, KNN, Tree based models, SVR, and
+Stochastic Gradient Descent. Each model was fitted with two datasets based on
+the pattern defined by the sub-model method. 
 
 
-Phase 3: Gen
-Phase 3 
+**Phase 3**: Generalization  
+In this phase, none of the features from the Census data were used to train the models. The model was trained with New York State data. 
 
-The general workflow of this project is also visuallized in the following gra
+To test the transferability of the model, the LA dataset will be used on the
+trained model to make predictions. 
+
+
+The general workflow of this project is shown in the following flowchart. 
+
 ---
 ## Workflow 
 ![workflow](./image/workflow.png)
 ---
 ## Conclusion 
 ### Phase 1: the Naive Approach
-We discovered that the naive approach led to data leakage issue, and therefore invalid. However, this does NOT mean that in general we can't use aggregated features along with the original dataset; we just can't aggregated the observations the SAME way that we aggregated the target.
+I discovered that the naive approach led to data leakage issue, and therefore invalid. However, this does NOT mean that in general we can't use aggregated features along with the original dataset; we just can't aggregated the observations the SAME way that we aggregated the target.
 
 
 ### Phase 2: Aggregation
@@ -118,19 +128,22 @@ based on the test R2 score. However, even the best model still shows signs of
 high variance, and the result is not optional.
 
 Based on the model evaluation, features from the census data play an
-importance role in the model's performance. This finding might pose challenges
+importance role in the model's performance. This finding posed challenges
 to my goal of developing a generalization of the model: i.e. Using the model to
 predict home affordability ratio in other U.S. regions without retraining the
 model.
 
 
 ### Phase 3: Generalization
-Without the census data, the performance of the model decreased. Training only with the Google Places API data, the `LinearRegression` Model combined with L1 Regularization outperforms the others. 
+Without the census data, the performance of the model decreased. Training only with the Google Places API data, the `LinearRegression` Model combined with L1 Regularization outperformed the others. 
 
-Using the trained `LinearRegression` Model to make predictions for the LA dataset, the model performed badly. Based on the test scores, as well as the residuals plots, we can conclude that the model trained on the New York State dataset is inadequate for the predication of home affordability ratios in LA. We can conclude that the trained model is not transferable. 
+Using the trained `LinearRegression` Model to make predictions for the LA
+dataset, the model performed badly. Based on the test scores, as well as the
+residuals plots, we can conclude that the model trained on the New York State
+dataset is inadequate for the predication of home affordability ratios in LA, and that the trained model is not transferable. 
 
-This outcome makes intuitive sense: New York State and LA has very different
-commercial landscapes, as well as demographic factors (such as median home
+This outcome makes intuitive sense: New York State and LA have very different
+commercial landscapes and demographics(such as median home
 prices and median annual income). The model that has been fitted and trained on the
 former is not able to capture the patterns of the latter. 
 
@@ -138,21 +151,22 @@ former is not able to capture the patterns of the latter.
 ## Limitation and Next Steps
 ### Next Steps
 **Step 1**: Improve data quality: 
-- Collect more data: during the early modeling process, I observed that the models' performance drastically increased after being trained with more data points (from only using NYC to NYS). Since the amount of observations (n = 1521), I will try to collect more data to improve the model's performance.
-- Sampling data from different regions in the U.S, and stratify the samples: In order to help the model learn a wider variety of dataset, I will try to randomly sample some zipcode across the States.
+- Collect more data: during the early modeling process, I observed that the
+  models' performance drastically improved after being trained with more data
+  points (from only using NYC to NYS). Since the amount of observations (n =
+  1521), I will try to collect more data to improve the model's performance.
+- Sampling data from different regions in the U.S, and stratify the samples: In order to help the model learn a wider range of dataset, I will try to randomly sample zipcodes across the States.
 - If step 1 has been accomplished, and there is no significant improvement in the model's ability of making predictions, I will do the following:
 
 **Step 2**: Reevaluate the assumptions: 
- - Research on what known factors have proven links to home affordability ratio:
-   the first and for-most assumption of this project is that commercial
+ - Research on what factors have been proven to be related to home affordability ratio:
+   the first and foremost assumption of this project is that commercial
    activities can be predictive for home affordability ratio. This assumption is
-   very likely to be unsound. During this project, we have confirmed that
+   very likely to be unsound. During this project, I have confirmed that
    including census data will increase the model performance; in other words,
    the commercial activity information collected from the Google Places API
    alone are not as predictive as combing with census data. There might be many
-   factors that link to the target: home affordability ratio, and further
-   research need to be conducted, so I will have more prior knowledge about what
-   might the be most significant factors in predicting home affordability ratio.
+   factors that link to home affordability ratio, and further research need to be conducted.
    
  ### Limitations
 Using **Google Place API** has many limitations in the data collection process: 
