@@ -33,10 +33,10 @@ informations, and receive predictions.
 
 ---
 ## Workflow 
-
+![workflow](./image/workflow.png)
 ---
 ## Conclusion 
-### Phase 1
+### Phase 1: the Naive Approach
 In Phase 1, I engineered aggregated features based on each zipcode, and
 concatenated them back to the original data-frame. In theory, the benefit of this
 approach is two fold:
@@ -48,7 +48,7 @@ be able to use ALL the original observations to train the models. However, as we
 discovered that this approach led to data leakage issue, and therefore invalid. However, this does NOT mean that in general we can't use aggregated features along with the original dataset; we just can't aggregated the observations the SAME way that we aggregated the target.
 
 
-### Phase 2
+### Phase 2: Aggregation
 In Phase 2, I used the aggregated observations by zipcode, combining with census
 data from the Income dataset to train the model.
 
@@ -67,7 +67,7 @@ predict home affordability ratio in other U.S. regions without retraining the
 model.
 
 
-### Phase 3
+### Phase 3: Generalization
 Without the census data, the performance of the model decreased. Training only with the Google Places API data, the `LinearRegression` Model combined with L1 Regularization outperforms the others. 
 
 Using the trained `LinearRegression` Model to make predictions for the LA dataset, the model performed badly. Based on the test scores, as well as the residuals plots, we can conclude that the model trained on the New York State dataset is inadequate for the predication of home affordability ratios in LA, especially given the model tends to over-predict the target. We can conclude that the trained model is not transferable. 

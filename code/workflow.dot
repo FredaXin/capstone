@@ -1,11 +1,51 @@
 # Reference https://graphviz.gitlab.io/_pages/pdf/dotguide.pdf
 
 digraph g {
-    label = "Foo =bar";
+    #splines=ortho;
+    node [fontsize=10];
+    dpi = 300;   
+    data_collection_label [label="Data Collection", shape=plaintext]
+    eda_label [label="EDA", shape=plaintext]
+    modeling_label [label="Modeling", shape=plaintext]
 
-    google_places [shape=square, label="Google Place API", fillcolor="pink", style=filled];
-   
-    google_places -> "Merged Dataset"[ label = "Foo =bar"]; 
-    "Census Data" -> "Merged Dataset";
-     "Merged Dataset" -> "Naive Approch"
+    google_places_api,
+    census_data,
+    merged_dataset
+    [shape=rectangle, fontsize=10, FIXEDSIZE=True];
+    
+    phase_1,
+    phase_2,
+    phase_3
+    [shape=oval, fontsize=10, FIXEDSIZE=True];
+
+    {rank=same; data_collection_label, google_places_api, census_data};
+
+    google_places_api [label="Google Places API"];
+    census_data [label="Census Data"];
+
+    {rank=same; eda_label, merged_dataset};
+
+    merged_dataset [label=<Merged Dataset<BR/>
+    <FONT POINT-SIZE="7">merged on ZCTA<BR/>3 datasets: NYC, NYS, LA</FONT>>]; 
+
+    {rank=same; modeling_label, phase_1, phase_1};
+    phase_1 [label=<Phase 1: Naive Approach<BR/>
+    <FONT POINT-SIZE="7">use original dataset as observations<BR/>
+    to train models;<BR/>observation size: 8,166</FONT>>];
+    phase_2 [label=<Phase 2: Aggregation<BR/>
+    <FONT POINT-SIZE="7">use aggregated data as observations<BR/>to train models;<BR/>observation size: 1,521</FONT>>];
+    phase_3 [label=<Phase 3: Generalization<BR/>
+    <FONT POINT-SIZE="7">use aggregated LA dataset<BR/>to test the trained model<BR/>observation size: 251</FONT>>];
+    
+    google_places_api -> merged_dataset; 
+    census_data -> merged_dataset;
+    merged_dataset -> phase_1[label = " NYC dataset (n = 8,166)", fontsize=6];
+    merged_dataset -> phase_2[label = "  NY State dataset (n = 42,918)", fontsize=6];
+    phase_2 -> phase_3[label = "  LA dataset (n = 8,128)", fontsize=6];
+
+
+
+
+    
+     
 }
