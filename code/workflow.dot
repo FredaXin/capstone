@@ -3,7 +3,7 @@
 digraph g {
     #splines=ortho;
     node [fontsize=10];
-    dpi = 300;   
+    graph [dpi = 72];   
     data_collection_label [label="Data Collection", shape=plaintext]
     eda_label [label="EDA", shape=plaintext]
     modeling_label [label="Modeling", shape=plaintext]

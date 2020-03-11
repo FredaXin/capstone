@@ -4,8 +4,8 @@ Author: [Freda Xin](https://github.com/FredaXin)
 
 ---
 ## Table of Contents
-Please note that for all the notebooks in the Data Collection and EDA sections
-are just a demo; for each notebook there is a corresponding
+Please note that the notebooks in the Data Collection and Initial Data Cleaning section
+are just demos; for each notebook there is a corresponding
 python script to handle repeated tasks.  
 - Data Collection and Initial Data Cleaning
     - [01_data_collection_google_places_API](https://github.com/FredaXin/capstone/blob/master/code/01_data_collection_google_places_API.ipynb)
@@ -26,29 +26,35 @@ python script to handle repeated tasks.
     - [05_03_modeling_phase_3_generalization](https://github.com/FredaXin/capstone/blob/master/code/05_03_modeling_phase_3_generalization.ipynb)
 ---
 ## Problem Statement:
-In regions where rapid new urban development emerges, home prices tend to become less affordable in the initial phase of the development. This phenomena occurs in many U.S. and Canadian cities such as San Francisco, Denver, and Vancouver, where the residents' income level does not keep up with the fast increase in home prices.
+In regions where rapid new urban development emerges, home prices tend to become
+less affordable in the initial phase of the development. This phenomena occurs
+in many U.S. regions such as San Francisco, Denver, and NYC, where the
+residents' income level could not keep up with the fast increase in home prices.
 
-Home affordability ratio is defined as the home price and median annual income ratio. "Historically a house in the US cost around 3 to 4 times the median annual income. During the housing bubble of 2007 the ratio surpassed 5 - in other words, the median price for a single family home in the United States cost more than 5 times the US median annual household income"(reference). In recent years, many U.S. and Canadian neighborhoods have become unaffordable for the residents.
+[Home affordability ratio](https://www.jchs.harvard.edu/home-price-income-ratios) is defined as the **median home price** and **median annual income** ratio. "Historically a house in the US cost around 3 to 4 times the median annual income. During the housing bubble of 2007 the ratio surpassed 5 - in other words, the median price for a single family home in the United States cost more than 5 times the US median annual household income"[(reference)](https://www.longtermtrends.net/home-price-median-annual-income-ratio/). In recent years, many U.S. neighborhoods have become unaffordable for the residents.
 
-In my project, I will explore whether commercial activities in a given neighborhood can be an indicator for the affordability of home prices. In particular, I will explore which types of business might be the best indicator of the neighborhood's affordability level. This approch has the advantage of lower costs than the traditional method based on census information. It can also serve as an early indicator used by a municipality: if certain patterns of business activities emerges, the problem of a neighborhood becomes unaffordable might fellow.
+In my project, I will explore whether commercial activities in a given
+neighborhood can be predictive for home affordability ratios. I will use the [Google Places
+API](https://developers.google.com/places/web-service/details) to gather data
+about neighborhood businesses, such as types, opening hours, price level etc. To
+calculate Home affordability ratio, I will use the Census data from
+[incomebyzipcode.com](https://www.incomebyzipcode.com/median-income-by-zip-code-list#order_form).
+The aim of the project is to develop a model that can make quick predictions
+given the latest commercial activities in a neighborhood. This approach has the
+advantage of being up-to-date, comparing to the traditional
+method based
+on census information. It can also serve as an early indicator used by a
+municipality: if certain patterns of business activities emerges, the problem of
+a neighborhood becomes unaffordable might fellow.
 
-I will use the Google Places API to gather data about neighborhood businesses, such as types, opening hours, price level etc. To calculate Home affordability ratio, I will scrap home prices data from Zillow, divided by the median income collected from US Cecus Bereau(good and cheap) (or buy the data from incomebyzipcode.com(Fast and Good).
 
-I will use unsupervised model during the EDA process to explore patterns of commercial activities. I will develop supervised regression models to predict affordability.
+I will develop **supervised regression models** to predict affordability and
+use **R2** score as the metric to measure the performance of the models.
 
-My project will be develped in 4 phases:
-
-Phase 1: Case study of NYC: develop models using NYC data
-Phase 2: Test if model is transferable for other urban areas, such as L.A. or Toronto
-Phase 3: Generlization: Test model can be generized and used in any given urban areas.
-Phase 4: Web interface: Develop a simple web interface so a client can imput
-informations, and receive predictions.
 
 ---
 ## Executive Summary
 
----
-## List of Assumptions
 
 ---
 ## Workflow 
@@ -89,9 +95,9 @@ model.
 ### Phase 3: Generalization
 Without the census data, the performance of the model decreased. Training only with the Google Places API data, the `LinearRegression` Model combined with L1 Regularization outperforms the others. 
 
-Using the trained `LinearRegression` Model to make predictions for the LA dataset, the model performed badly. Based on the test scores, as well as the residuals plots, we can conclude that the model trained on the New York State dataset is inadequate for the predication of home affordability ratios in LA, especially given the model tends to over-predict the target. We can conclude that the trained model is not transferable. 
+Using the trained `LinearRegression` Model to make predictions for the LA dataset, the model performed badly. Based on the test scores, as well as the residuals plots, we can conclude that the model trained on the New York State dataset is inadequate for the predication of home affordability ratios in LA. We can conclude that the trained model is not transferable. 
 
-This outcomes makes intuitive sense: New York State and LA has very different
+This outcome makes intuitive sense: New York State and LA has very different
 commercial landscapes, as well as demographic factors (such as median home
 prices and median annual income). The model that has been fitted and trained on the
 former is not able to capture the patterns of the latter. 
