@@ -4,7 +4,26 @@ Author: [Freda Xin](https://github.com/FredaXin)
 
 ---
 ## Table of Contents
-
+Please note that for all the notebooks in the Data Collection and EDA sections
+are just a demo; for each notebook there is a corresponding
+python script to handle repeated tasks.  
+- Data Collection and Initial Data Cleaning
+    - [01_data_collection_google_places_API](https://github.com/FredaXin/capstone/blob/master/code/01_data_collection_google_places_API.ipynb)
+       | [python script](https://github.com/FredaXin/capstone/blob/master/code/data_collection_google.py)
+    - [02_01_initial_data_cleaning_google_phase_1](https://github.com/FredaXin/capstone/blob/master/code/02_01_initial_data_cleaning_google_phase_1.ipynb) | [python script](https://github.com/FredaXin/capstone/blob/master/code/initial_data_cleaning_google_phase_1.py)
+    - [02_02_initial_data_cleaning_google_phase_2_3](https://github.com/FredaXin/capstone/blob/master/code/02_02_initial_data_cleaning_google_phase_2_3.ipynb)
+      | [python script](https://github.com/FredaXin/capstone/blob/master/code/initial_data_cleaning_google_phase_2_3.py)
+    - [03_initial_data_cleaning_income_by_zip](https://github.com/FredaXin/capstone/blob/master/code/03_initial_data_cleaning_income_by_zip.ipynb)
+      | [python script](https://github.com/FredaXin/capstone/blob/master/code/initial_data_cleaning_income_by_zip.py)
+    
+- EDA
+    - [04_eda_and_data_cleaning](https://github.com/FredaXin/capstone/blob/master/code/04_eda_and_data_cleaning.ipynb)
+      | [python script](https://github.com/FredaXin/capstone/blob/master/code/data_cleaning_phase_2_3.py)
+    
+- Modeling
+    - [05_01_modeling_phase_1_naive_approach](https://github.com/FredaXin/capstone/blob/master/code/05_01_modeling_phase_1_naive_approach.ipynb)
+    - [05_02_modeling_phase_2_aggregation](https://github.com/FredaXin/capstone/blob/master/code/05_02_modeling_phase_2_aggregation.ipynb)
+    - [05_03_modeling_phase_3_generalization](https://github.com/FredaXin/capstone/blob/master/code/05_03_modeling_phase_3_generalization.ipynb)
 ---
 ## Problem Statement:
 In regions where rapid new urban development emerges, home prices tend to become less affordable in the initial phase of the development. This phenomena occurs in many U.S. and Canadian cities such as San Francisco, Denver, and Vancouver, where the residents' income level does not keep up with the fast increase in home prices.
@@ -110,5 +129,11 @@ Using **Google Place API** has many limitations in the data collection process:
 
 ---
 ## References 
-- *[**Home Price-to-Income Ratios**](https://www.jchs.harvard.edu/home-price-income-ratios)* by Joint Center for Housing Studies of Harvard University
-- 
+- [Home Price-to-Income Ratios](https://www.jchs.harvard.edu/home-price-income-ratios) by Joint Center for Housing Studies of Harvard University
+- [Home Price to Income
+  Ratio](https://www.longtermtrends.net/home-price-median-annual-income-ratio/)
+  by longtermtrends.net
+- [The Impact Of Commercial Development On Surrounding Residential Property
+  Values](https://www.gamls.com/images/jonwiley.pdf) by Jonathan A. Wiley, Ph.D.
+- [Predicting Neighborhoods’ Socioeconomic Attributes Using Restaurant
+  Data](https://www.pnas.org/content/116/31/15447) by Lei Dong, Carlo Ratti, and Siqi Zheng
