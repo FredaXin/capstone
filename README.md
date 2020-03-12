@@ -4,8 +4,8 @@ Author: [Freda Xin](https://github.com/FredaXin)
 
 ---
 ## Table of Contents
-Please note that the notebooks in the Data Collection and Initial Data Cleaning section
-are just demos; for each notebook there is a corresponding
+Please note that the notebooks in the **Data Collection and Initial Data Cleaning** section
+are just demonstrations for early stage development; for each notebook there is a corresponding
 python script to handle repeated tasks.  
 - Data Collection and Initial Data Cleaning
     - [01_data_collection_google_places_API](https://github.com/FredaXin/capstone/blob/master/code/01_data_collection_google_places_API.ipynb)
@@ -43,7 +43,7 @@ The aim of the project is to develop a model that can make quick predictions
 given the latest commercial activities in a neighborhood. This approach has the
 advantage of being up-to-date, comparing to the traditional
 method based
-on census information. It can also serve as an early indicator used by a
+on census information. It can also serve as an early indicator and to be used by any
 municipality: if certain patterns of business activities emerges, the problem of
 a neighborhood becomes unaffordable might fellow.
 
@@ -188,4 +188,7 @@ Using **Google Place API** has many limitations in the data collection process:
 - [The Impact Of Commercial Development On Surrounding Residential Property
   Values](https://www.gamls.com/images/jonwiley.pdf) by Jonathan A. Wiley, Ph.D.
 - [Predicting Neighborhoods’ Socioeconomic Attributes Using Restaurant
-  Data](https://www.pnas.org/content/116/31/15447) by Lei Dong, Carlo Ratti, and Siqi Zheng
+  Data](https://www.pnas.org/content/116/31/15447) by Lei Dong, Carlo Ratti, and
+  Siqi Zheng
+- [Big Data and Big Cities: The Promises and Limitations of Improved Measures of
+  Urban Life](https://www.nber.org/papers/w21778) by Edward L. Glaeser, Scott Duke Kominers, Michael Luca, Nikhil Naik 
