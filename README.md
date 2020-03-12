@@ -89,21 +89,17 @@ approach is twofold:
   This will ensure that we have sufficient amount data to train the models.
 
 **Phase 2**: Aggregation  
-I used the aggregated observations by zipcode, combining with census data from the Income dataset to train the models.
-
-I used the the pattern sub-model technique to handle missing data. This enabled
-us to handle the missing data without imputation or dropping observations.
-
-6 types of models were trained: Linear Regression (combined with various
+I used the aggregated observations by zipcode, combining with census data from
+the Income dataset to train the models. I used the the pattern sub-model
+technique to handle missing data. This enabled
+us to handle the missing data without imputation or dropping observations. 6 types of models were trained: Linear Regression (combined with various
 regularization techniques), Polynomial Regression, KNN, Tree based models, SVR, and
 Stochastic Gradient Descent. Each model was fitted with two datasets based on
 the pattern defined by the sub-model method. 
 
 
 **Phase 3**: Generalization  
-In this phase, none of the features from the Census data were used to train the models. The model was trained with New York State data. 
-
-To test the transferability of the model, the LA dataset will be used on the
+In this phase, none of the features from the Census data were used to train the models. The model was trained with New York State data. To test the transferability of the model, the LA dataset will be used on the
 trained model to make predictions. 
 
 
