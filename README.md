@@ -118,7 +118,7 @@ I discovered that the naive approach led to data leakage issue, and therefore wa
 
 
 ### Phase 2: Aggregation
-In Phase 2, I used the aggregated observations by zipcode, combining with census
+In Phase 2, I used the aggregated observations by zipcode, combined with census
 data from the Income dataset to train the model.
 
 The pattern sub-model enabled me to handle missing data without imputation or dropping observations.
